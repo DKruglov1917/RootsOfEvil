@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
     private float playerSpeed = 2.0f;
     private float gravityValue = -9.81f;
 
-    [SerializeField]private Animator swordAnimator;
+    [SerializeField] private int damage;
+
+    [SerializeField] private Animator swordAnimator;
 
     private void Start()
     {
@@ -49,7 +51,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             swordAnimator.SetTrigger("Attack");
-            Debug.Log("MEH");
-        }
+
+            RaycastHit hit;
+            // Does the ray intersect any objects excluding the player layer
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            {
+                if (hit.transform.gameObject.TryGetComponent<Enemy>(out Enemy hitEnemy))
+                {
+                    hitEnemy.TakeDamage(damage);
+                }
+
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                Debug.Log("Did Hit");
+            }
+            else
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+                Debug.Log("Did not Hit");
+            }
+        }        
     }
 }
