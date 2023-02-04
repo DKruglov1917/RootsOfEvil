@@ -7,9 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class RoomsPlacer : MonoBehaviour
 {
+    public delegate void roomAction(int x, int y);
+    public static event roomAction onRoomPlaced;
+
     public GameObject dungeounObj;
     public Room[] RoomPrefabs;
     public Room StartingRoom;
+
+    [HideInInspector] public List<GameObject> dungeonRooms = new List<GameObject>();
 
     private Room[,] spawnedRooms;    
 
@@ -59,7 +64,12 @@ public class RoomsPlacer : MonoBehaviour
 
             if (ConnectToSomething(newRoom, position))
             {
-                newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 12;
+                newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 12; //change to room size
+
+                dungeonRooms.Add(newRoom.gameObject);
+                onRoomPlaced?.Invoke(position.x, position.y);
+                newRoom.num = dungeonRooms.Count;
+
                 spawnedRooms[position.x, position.y] = newRoom;
                 return;
             }
