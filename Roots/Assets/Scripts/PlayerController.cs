@@ -6,19 +6,22 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public RoomsPlacer roomsPlacer;
+    public Animator animator;
+    public float playerSpeed = 2.0f;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
-    public float playerSpeed = 2.0f;
+    [SerializeField] private int damage;
+    [SerializeField] private Animator swordAnimator;   
     private float gravityValue = -9.81f;
 
-    [SerializeField] private int damage;
+    private bool isAiming;
+    private Vector2 aimStart, aimEnd;
+    public Vector3 lookDot;
+    private Vector3 velocity;
 
-    [SerializeField] private Animator swordAnimator;
+    private string state;
 
-    private Vector3 lookDot;
-
-    public GameObject testSphere;
 
     private void Start()
     {
@@ -31,7 +34,9 @@ public class PlayerController : MonoBehaviour
     {
         MovementControls();
         Attack();
-        Look();
+        Aim();
+        if (!isAiming) Look();
+        Animate();
     }
 
     private void MovementControls()
@@ -39,10 +44,44 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        if(!controller.isGrounded)
+        velocity = controller.velocity.normalized;
+
+        if (!controller.isGrounded)
             playerVelocity.y += gravityValue * Time.deltaTime;
 
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    private void Animate()
+    {
+        var heading = lookDot - new Vector3(transform.position.x, 0, transform.position.z);
+
+        var angle = Vector3.SignedAngle(velocity, heading, Vector3.up);
+
+        if (velocity == Vector3.zero || angle == 90)
+        {
+            animator.SetTrigger("Idle");
+        }
+        else
+        {
+            Debug.Log(angle);
+            if (angle > -45 && angle < 45) animator.SetTrigger("Fwd");
+            if (angle > -120 && angle < -45) animator.SetTrigger("Right");
+            if (angle > 45 && angle < 120) animator.SetTrigger("Left");
+            if (angle > 120 || angle < -120) animator.SetTrigger("Bwd");
+        }
+    }
+
+    private void Aim()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            isAiming = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            isAiming = false;
+        }
     }
 
     private void Look()
@@ -51,13 +90,10 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100, 7))
         {
-            Debug.Log(hit.transform.name);
-            Debug.Log("hit");
-
             var direction = (hit.point - transform.position).normalized;
             direction.y = 0f;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 5f);
-
+            lookDot = new Vector3(hit.point.x, 0, hit.point.z);
         }        
     }
 
