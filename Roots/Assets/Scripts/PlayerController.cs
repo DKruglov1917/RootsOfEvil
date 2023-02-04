@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public RoomsPlacer roomsPlacer;
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private float playerSpeed = 2.0f;

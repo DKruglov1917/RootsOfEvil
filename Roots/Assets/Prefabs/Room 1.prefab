@@ -2920,6 +2920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2412619620007474450}
   - component: {fileID: 6347570889107055657}
+  - component: {fileID: 7847288918789241363}
   m_Layer: 0
   m_Name: Room 1
   m_TagString: Untagged
@@ -2962,6 +2963,20 @@ MonoBehaviour:
   DoorD: {fileID: 1772225628831614794}
   DoorL: {fileID: 9167856076635294870}
   navMeshSurface: {fileID: 1685852325276351688}
+  num: 0
+--- !u!65 &7847288918789241363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2412619620007474451}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12, y: 3, z: 12}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2412619620946025052
 GameObject:
   m_ObjectHideFlags: 0
