@@ -504,7 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 492482549}
   - component: {fileID: 492482550}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 613610132}
   - component: {fileID: 613610131}
   - component: {fileID: 613610130}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 900999324}
   - component: {fileID: 900999323}
   - component: {fileID: 900999325}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -854,8 +854,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomsPlacer: {fileID: 0}
+  playerSpeed: 5
   damage: 25
   swordAnimator: {fileID: 1252483021}
+  testSphere: {fileID: 4383996614965609995, guid: 52d4432e2d7e04946abe31a54fa07390, type: 3}
 --- !u!143 &900999324
 CharacterController:
   m_ObjectHideFlags: 0
@@ -886,9 +888,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &914519414
 GameObject:
@@ -934,7 +936,7 @@ GameObject:
   - component: {fileID: 933640510}
   - component: {fileID: 933640509}
   - component: {fileID: 933640512}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SwordMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1056,7 +1058,7 @@ GameObject:
   - component: {fileID: 1117082769}
   - component: {fileID: 1117082768}
   - component: {fileID: 1117082767}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1156,7 @@ GameObject:
   - component: {fileID: 1182745558}
   - component: {fileID: 1182745557}
   - component: {fileID: 1182745556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,72 +1241,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182745554}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1206246344
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1754118183}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.933176
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 18.293068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_Name
-      value: tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 1602564128540957456, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f4e40c51e1b9fa047b8efa5a840de2c8, type: 2}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
---- !u!4 &1206246345 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b91a3ec194190cc4987282e507ed272a, type: 3}
-  m_PrefabInstance: {fileID: 1206246344}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1226880492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,7 +1283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1252483020}
   - component: {fileID: 1252483021}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1402,7 +1338,7 @@ GameObject:
   - component: {fileID: 1262312628}
   - component: {fileID: 1262312627}
   - component: {fileID: 1262312626}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1619,7 +1555,7 @@ GameObject:
   - component: {fileID: 1514139524}
   - component: {fileID: 1514139525}
   - component: {fileID: 1514139526}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1707,7 +1643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1710641950}
   - component: {fileID: 1710641951}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1846,7 +1782,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2136444103}
-  - {fileID: 1206246345}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1863,7 +1798,7 @@ GameObject:
   - component: {fileID: 1935428096}
   - component: {fileID: 1935428095}
   - component: {fileID: 1935428094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SwordMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
