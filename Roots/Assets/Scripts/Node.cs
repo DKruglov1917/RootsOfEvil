@@ -29,8 +29,8 @@ public class Node : MonoBehaviour
     public NodeType nodeType;
     public LevelDifficulty levelDifficulty;
     public LevelType levelType;
-
-    public void PressButton()
+    
+    private void OnMouseDown()
     {
         onNodePressed?.Invoke(nodeType, levelDifficulty, levelType);
     }
