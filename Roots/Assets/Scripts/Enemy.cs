@@ -57,7 +57,6 @@ public class Enemy : MonoBehaviour
     {
         if (Vector3.Distance(agent.transform.position, agent.destination) < 1)
         {
-            Debug.Log("agent has arrived");
             agent.destination = GetRandomLocation();
         }
     }
