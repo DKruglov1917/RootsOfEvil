@@ -23,7 +23,7 @@ public class RoomsPlacer : MonoBehaviour
         spawnedRooms = new Room[11, 11];
         spawnedRooms[5, 5] = StartingRoom;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 8; i++)
         {          
             PlaceOneRoom();
         }

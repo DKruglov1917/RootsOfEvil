@@ -15,6 +15,7 @@ public class RayScan : MonoBehaviour
     void Start()
     {
         enemy = GetComponent<Enemy>();
+        player = GameObject.Find("Player");
     }
 
     bool GetRaycast(Vector3 dir)

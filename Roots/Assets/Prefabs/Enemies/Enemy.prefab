@@ -2132,6 +2132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  animator: {fileID: 8903428278106009254}
   isAggred: 0
   target: {fileID: 0}
   maxHealth: 100

@@ -24,6 +24,8 @@ public class Room : MonoBehaviour
 
     public GameObject Root, Portal;
 
+    public GameObject Enemies;
+
 
     private void Awake()
     {
@@ -52,6 +54,21 @@ public class Room : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void Start()
+    {
+        SpawnEnemies();
+    }
+
+    private void SpawnEnemies()
+    {
+        int rnd = Random.Range(0, Enemies.transform.childCount);
+
+        for (int i = 0; i < rnd; i++)
+        {
+            Enemies.transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 
