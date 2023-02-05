@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -5,13 +6,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static int damage = 25;
+
     public RoomsPlacer roomsPlacer;
     public Animator animator;
     public float playerSpeed = 2.0f;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
-    [SerializeField] private int damage;
     [SerializeField] private Animator swordAnimator;   
     private float gravityValue = -9.81f;
 
@@ -20,7 +22,11 @@ public class PlayerController : MonoBehaviour
     public Vector3 lookDot;
     private Vector3 velocity;
 
-    private string state;
+    public GameObject attackCursor;
+
+    public TrailRenderer swordTrail;
+
+    public static bool isPlayerAttack;
 
 
     private void Start()
@@ -32,11 +38,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        MovementControls();
-        Attack();
         Aim();
-        if (!isAiming) Look();
-        Animate();
+
+        if (AttackAnimCheck())
+        {
+            isPlayerAttack = true;
+            swordTrail.enabled = true;
+            return;
+        }
+        else
+        {
+            isPlayerAttack = false;
+            swordTrail.enabled = false;
+            if (!isAiming) MovementControls();
+            if (isAiming) TrailTheAttack();
+            if (!isAiming) Look();
+            Animate();
+        }
     }
 
     private void MovementControls()
@@ -54,6 +72,8 @@ public class PlayerController : MonoBehaviour
 
     private void Animate()
     {
+        if (isAiming) return;
+
         var heading = lookDot - new Vector3(transform.position.x, 0, transform.position.z);
 
         var angle = Vector3.SignedAngle(velocity, heading, Vector3.up);
@@ -64,11 +84,20 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log(angle);
             if (angle > -45 && angle < 45) animator.SetTrigger("Fwd");
-            if (angle > -120 && angle < -45) animator.SetTrigger("Right");
-            if (angle > 45 && angle < 120) animator.SetTrigger("Left");
-            if (angle > 120 || angle < -120) animator.SetTrigger("Bwd");
+            else if (angle > -120 && angle < -45) animator.SetTrigger("Right");
+            else if (angle > 45 && angle < 120) animator.SetTrigger("Left");
+            else if (angle > 120 || angle < -120) animator.SetTrigger("Bwd");
+        }
+    }
+
+    private void TrailTheAttack()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            attackCursor.transform.position = hit.point;
         }
     }
 
@@ -77,11 +106,51 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isAiming = true;
+            controller.Move(Vector3.zero);
+            aimStart = Input.mousePosition;
+            attackCursor.SetActive(true);            
         }
         if (Input.GetMouseButtonUp(0))
         {
-            isAiming = false;
+            aimEnd = Input.mousePosition;
+            attackCursor.SetActive(false);
+
+
+            var attackHeading = aimEnd - aimStart;
+            float x, y;
+            x = Math.Abs(attackHeading.x);
+            y = Math.Abs(attackHeading.y);
+
+            float max3 = Math.Max(x, y);
+
+            if(max3 == x)
+            {
+                animator.SetTrigger("slashAttack");
+            }
+            if(max3 == y)
+            {
+                if(attackHeading.y >= 0)
+                {
+                    animator.SetTrigger("downAttack");
+                }
+                else
+                {
+                    animator.SetTrigger("upAttack");
+                }
+            }
+
+            animator.SetTrigger("Attack");
+
+            StartCoroutine("StopAim");
         }
+    }
+
+    private bool AttackAnimCheck()
+    {
+        if (AnimatorIsPlaying("upAttack")) return true;
+        else if (AnimatorIsPlaying("downAttack")) return true;
+        else if (AnimatorIsPlaying("slashAttack")) return true;
+        else return false;
     }
 
     private void Look()
@@ -97,29 +166,20 @@ public class PlayerController : MonoBehaviour
         }        
     }
 
-    private void Attack()
+    bool AnimatorIsPlaying()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            swordAnimator.SetTrigger("Attack");
+        return animator.GetCurrentAnimatorStateInfo(0).length >
+               animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
 
-            RaycastHit hit;
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
-            {
-                if (hit.transform.gameObject.TryGetComponent<Enemy>(out Enemy hitEnemy))
-                {
-                    hitEnemy.TakeDamage(damage);
-                }
+    bool AnimatorIsPlaying(string stateName)
+    {
+        return AnimatorIsPlaying() && animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    }
 
-                //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit");
-            }
-            else
-            {
-                //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-                Debug.Log("Did not Hit");
-            }
-        }        
+    IEnumerator StopAim()
+    {        
+        yield return new WaitForSeconds(.5f);
+        isAiming = false;
     }
 }

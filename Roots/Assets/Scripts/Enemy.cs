@@ -25,11 +25,6 @@ public class Enemy : MonoBehaviour
             FoolingAround();
     }
 
-    private void Vision()
-    {
-
-    }
-
     private void RestartHealth()
     {
         health = maxHealth;
@@ -73,5 +68,14 @@ public class Enemy : MonoBehaviour
         Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[t + 2]], Random.value);
 
         return point;
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "Sword" && PlayerController.isPlayerAttack)
+        {
+            TakeDamage(PlayerController.damage);
+            Debug.Log("Attack");
+        }
     }
 }

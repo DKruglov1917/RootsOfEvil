@@ -64,7 +64,7 @@ public class RoomsPlacer : MonoBehaviour
 
             if (ConnectToSomething(newRoom, position))
             {
-                newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 12; //change to room size
+                newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 24; //change to room size
 
                 dungeonRooms.Add(newRoom.gameObject);
                 onRoomPlaced?.Invoke(position.x, position.y);

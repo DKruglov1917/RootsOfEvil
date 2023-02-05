@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +17,40 @@ public class Room : MonoBehaviour
 
     public int num;
     private bool isVisited;
+
+    public GameObject ObstaclesObj;
+
+    private List<GameObject> deactivatedObstacles = new List<GameObject>();
+
+    private void Start()
+    {
+        if(!ObstaclesObj) return;
+
+        int rnd = Random.Range(0, ObstaclesObj.transform.childCount);
+
+        for (int i = 0; i < rnd; i++)
+        {
+            int boolRnd = Random.Range(0, 2);
+
+            if (boolRnd == 1)
+            {
+                while (true)
+                {
+                    int obstRnd = Random.Range(0, ObstaclesObj.transform.childCount);
+                    var curObj = ObstaclesObj.transform.GetChild(obstRnd).gameObject;
+
+                    if (deactivatedObstacles.Contains(curObj)) continue;
+
+                    else
+                    {
+                        curObj.gameObject.SetActive(false);
+                        deactivatedObstacles.Add(curObj);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     public void RotateRandomly()
     {
