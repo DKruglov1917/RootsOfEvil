@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         audioSource.Play();
     }
 
-    public static int damage = 25;
+    public static int damage = 50;
 
     public RoomsPlacer roomsPlacer;
     public Animator animator;
@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     public TrailRenderer swordTrail;
 
     public static bool isPlayerAttack;
+
+    public int health;
 
 
     private void Start()
@@ -84,6 +86,12 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y += gravityValue * Time.deltaTime;
 
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    public void TakeDamage()
+    {
+        health -= 5;
+        Debug.Log(health);
     }
 
     private void Animate()

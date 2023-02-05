@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 3118043613091985970}
   isAggred: 0
   target: {fileID: 0}
   maxHealth: 100

@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
 
     private Outline outline;
 
+    private bool isAttacking;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -25,10 +27,16 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         if (isDead) return;
+        if (isAttacking) return;
+
+        if (isAggred) agent.speed = 2;
+        else agent.speed = 1;
 
         if (!isAggred)
             FoolingAround();
         else Chasing();
+
+        Animate();
     }
 
     private void RestartHealth()
@@ -44,14 +52,18 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
-
-        Debug.Log("DAMAGE IS " + damage + "ENEMY HEALTH IS " + health);
     }
 
     private void Die()
     {
         isDead = true;
         gameObject.SetActive(false);
+    }
+
+    private void Animate()
+    {
+        if (isAggred) animator.SetTrigger("Run");
+        else animator.SetTrigger("Idke");
     }
 
     private void Chasing()
@@ -63,7 +75,7 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        animator.SetTrigger("Attack");
+        StartCoroutine("AttackCourotine");
     }
 
     private void FoolingAround()
@@ -105,6 +117,18 @@ public class Enemy : MonoBehaviour
         outline.enabled = true;
         yield return new WaitForSeconds(.3f);
         outline.enabled = false;
+    }
+
+    IEnumerator AttackCourotine()
+    {
+        if (!isAttacking)
+        {
+            animator.SetTrigger("Attack");
+            isAttacking = true;
+            yield return new WaitForSeconds(1f);
+            target.GetComponent<PlayerController>().TakeDamage();
+            isAttacking = false;
+        }
     }
 
 }
