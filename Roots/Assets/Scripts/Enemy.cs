@@ -5,8 +5,10 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    private bool isAggred;
+    [HideInInspector] public NavMeshAgent agent;
+    public Animator animator;
+    public bool isAggred;
+    public GameObject target;
     private bool isDead;
     [SerializeField] private int maxHealth, health;
 
@@ -21,8 +23,9 @@ public class Enemy : MonoBehaviour
     {
         if (isDead) return;
 
-        if(!isAggred)
+        if (!isAggred)
             FoolingAround();
+        else Chasing();
     }
 
     private void RestartHealth()
@@ -46,6 +49,18 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         gameObject.SetActive(false);
+    }
+
+    private void Chasing()
+    {
+        if (Vector3.Distance(transform.position, target.transform.position) > 1)
+            agent.destination = new Vector3(target.transform.position.x, 0.5f, target.transform.position.z);
+        else Attack();
+    }
+
+    private void Attack()
+    {
+        animator.SetTrigger("Attack");
     }
 
     private void FoolingAround()
@@ -78,4 +93,5 @@ public class Enemy : MonoBehaviour
             Debug.Log("Attack");
         }
     }
+
 }
