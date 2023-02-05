@@ -129,7 +129,9 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("Attack");
             isAttacking = true;
             yield return new WaitForSeconds(1f);
-            target.GetComponent<PlayerController>().TakeDamage();
+
+            if (Vector3.Distance(transform.position, target.transform.position) < 1.5f)
+                target.GetComponent<PlayerController>().TakeDamage();
             isAttacking = false;
         }
     }

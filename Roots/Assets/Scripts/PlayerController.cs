@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -48,12 +49,17 @@ public class PlayerController : MonoBehaviour
 
     public Animator damageAnimator;
 
+    public Slider slider;
+
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        health = 100;
+        slider.maxValue = health;
+        slider.value = health;
     }
 
     private void Update()
@@ -94,6 +100,8 @@ public class PlayerController : MonoBehaviour
     {
         health -= 5;
         damageAnimator.SetTrigger("takeDamage");
+        slider.value = health;
+
         Debug.Log(health);
     }
 
