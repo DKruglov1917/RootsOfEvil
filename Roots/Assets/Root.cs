@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip clip;
     public static bool hasHealedRoot;
+
+    private void Start()
+    {
+        audioSource.clip = clip;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,6 +20,7 @@ public class Root : MonoBehaviour
         {
             hasHealedRoot = true;
             gameObject.SetActive(false);
+            audioSource.Play();
         }
     }
 }

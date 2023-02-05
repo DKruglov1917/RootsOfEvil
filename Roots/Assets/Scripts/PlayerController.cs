@@ -191,6 +191,7 @@ public class PlayerController : MonoBehaviour
             }
 
             animator.SetTrigger("Attack");
+            PlaySword();
 
             StartCoroutine("StopAim");
         }
