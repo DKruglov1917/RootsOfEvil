@@ -6,6 +6,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    private AudioSource audioSource;
+    public AudioClip swordSwing;
+
+    private void Awake()
+
+    {
+        audioSource = GetComponent<AudioSource>();
+    } 
+
+    public void PlaySword()
+    {
+        audioSource.clip = swordSwing;
+        audioSource.Play();
+    }
+
     public static int damage = 25;
 
     public RoomsPlacer roomsPlacer;
