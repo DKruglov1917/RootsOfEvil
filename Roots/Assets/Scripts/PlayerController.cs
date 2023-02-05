@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour
 
     public Slider slider;
 
+    private bool dead;
+
+    public GameObject DeathScreen;
+
 
     private void Start()
     {
@@ -60,10 +64,13 @@ public class PlayerController : MonoBehaviour
         health = 100;
         slider.maxValue = health;
         slider.value = health;
+        Time.timeScale = 1;
     }
 
     private void Update()
     {
+        if (dead) return;
+
         Aim();
 
         if (AttackAnimCheck())
@@ -81,6 +88,13 @@ public class PlayerController : MonoBehaviour
             if (!isAiming) Look();
             Animate();
         }
+    }
+
+    private void Die()
+    {
+        dead = true;
+        DeathScreen.SetActive(true);
+        Time.timeScale = 0.2f;
     }
 
     private void MovementControls()
@@ -101,6 +115,8 @@ public class PlayerController : MonoBehaviour
         health -= 5;
         damageAnimator.SetTrigger("takeDamage");
         slider.value = health;
+
+        if (health <= 0) Die();
 
         Debug.Log(health);
     }

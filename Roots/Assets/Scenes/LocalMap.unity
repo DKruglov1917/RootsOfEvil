@@ -1852,6 +1852,7 @@ MonoBehaviour:
   health: 200
   damageAnimator: {fileID: 31131502}
   slider: {fileID: 1520429153}
+  DeathScreen: {fileID: 1253244240}
 --- !u!143 &900999324
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2839,7 +2840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9098039}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
