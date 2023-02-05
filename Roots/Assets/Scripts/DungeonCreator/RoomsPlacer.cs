@@ -23,7 +23,7 @@ public class RoomsPlacer : MonoBehaviour
         spawnedRooms = new Room[11, 11];
         spawnedRooms[5, 5] = StartingRoom;
 
-        for (int i = 0; i < 22; i++)
+        for (int i = 0; i < 5; i++)
         {          
             PlaceOneRoom();
         }
@@ -34,6 +34,20 @@ public class RoomsPlacer : MonoBehaviour
         //{
         //    dungeounObj.transform.GetChild(i).GetComponent<Room>().navMeshSurface.BuildNavMesh();
         //}
+
+        int rnd = Random.Range(0, dungeonRooms.Count);
+
+        dungeonRooms[rnd].GetComponent<Room>().Portal.SetActive(true);
+
+        rnd = Random.Range(0, dungeonRooms.Count);
+
+        dungeonRooms[rnd].GetComponent<Room>().Root.SetActive(true);
+
+    }
+
+    private void PlacePortalAndExit()
+    {
+
     }
 
     private void PlaceOneRoom()

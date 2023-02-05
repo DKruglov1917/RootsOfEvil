@@ -22,6 +22,9 @@ public class Room : MonoBehaviour
 
     private List<GameObject> deactivatedObstacles = new List<GameObject>();
 
+    public GameObject Root, Portal;
+
+
     private void Awake()
     {
         if(!ObstaclesObj) return;
