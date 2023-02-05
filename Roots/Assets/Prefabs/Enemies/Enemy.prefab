@@ -2167,7 +2167,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 0.447, g: 0, b: 0, a: 1}
   outlineWidth: 2
-  precomputeOutline: 1
+  precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
 --- !u!1 &7909283082227646306

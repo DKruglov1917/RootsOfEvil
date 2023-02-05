@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
 
     public int health;
 
+    public Animator damageAnimator;
+
 
     private void Start()
     {
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         health -= 5;
+        damageAnimator.SetTrigger("takeDamage");
         Debug.Log(health);
     }
 

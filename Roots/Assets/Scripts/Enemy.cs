@@ -114,9 +114,12 @@ public class Enemy : MonoBehaviour
 
     IEnumerator DamageOutline()
     {
-        outline.enabled = true;
-        yield return new WaitForSeconds(.3f);
-        outline.enabled = false;
+        if (!outline.enabled)
+        {
+            outline.enabled = true;
+            yield return new WaitForSeconds(.5f);
+            outline.enabled = false;
+        }
     }
 
     IEnumerator AttackCourotine()
