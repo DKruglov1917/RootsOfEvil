@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public bool isAggred;
     public GameObject target;
-    private bool isDead;
+    public bool isDead;
     [SerializeField] private int maxHealth, health;
 
     private Outline outline;
@@ -57,7 +57,8 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        gameObject.SetActive(false);
+        agent.enabled = false;
+        animator.SetTrigger("Death");
     }
 
     private void Animate()
@@ -102,6 +103,8 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
+        if (isDead) return;
+
         if (col.tag == "Sword" && PlayerController.isPlayerAttack)
         {
             TakeDamage(PlayerController.damage);
@@ -135,5 +138,4 @@ public class Enemy : MonoBehaviour
             isAttacking = false;
         }
     }
-
 }

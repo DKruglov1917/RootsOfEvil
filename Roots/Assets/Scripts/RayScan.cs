@@ -73,13 +73,15 @@ public class RayScan : MonoBehaviour
 
     void Update()
     {
+        if (enemy.isDead) return;
+
         target = player.transform;
 
         if (Vector3.Distance(transform.position, target.position) < distance)
         {
             if (RayToScan())
             {
-                var direction = (player.transform.position - transform.position).normalized;
+                var direction = (player.transform.position - transform.position).normalized;                
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 5f);
 
                 enemy.target = player;
