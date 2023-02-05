@@ -12,9 +12,12 @@ public class Enemy : MonoBehaviour
     private bool isDead;
     [SerializeField] private int maxHealth, health;
 
+    private Outline outline;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        outline = GetComponent<Outline>();
 
         RestartHealth();
     }
@@ -91,7 +94,17 @@ public class Enemy : MonoBehaviour
         {
             TakeDamage(PlayerController.damage);
             Debug.Log("Attack");
+            isAggred = true;
+            if(gameObject.activeSelf)
+                StartCoroutine("DamageOutline");
         }
+    }
+
+    IEnumerator DamageOutline()
+    {
+        outline.enabled = true;
+        yield return new WaitForSeconds(.3f);
+        outline.enabled = false;
     }
 
 }

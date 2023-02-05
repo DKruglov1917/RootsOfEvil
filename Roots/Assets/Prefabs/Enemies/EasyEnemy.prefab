@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 3118043613437948213}
   - component: {fileID: 3118043613437948214}
   - component: {fileID: 3118043613437948215}
+  - component: {fileID: 9078185859666395624}
   m_Layer: 7
   m_Name: EasyEnemy
   m_TagString: Enemy
@@ -150,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  animator: {fileID: 0}
   isAggred: 0
   target: {fileID: 0}
   maxHealth: 100
@@ -168,6 +170,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &9078185859666395624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3118043613437948210}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0.447, g: 0, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 1
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &2457901489493088432
 PrefabInstance:
   m_ObjectHideFlags: 0
