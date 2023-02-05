@@ -23,6 +23,11 @@ public class Menu : MonoBehaviour
         StartCoroutine("WaitAndStopTheTree");
     }
 
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
+
     IEnumerator WaitAndStopTheTree()
     {
         yield return new WaitForSeconds(3);
