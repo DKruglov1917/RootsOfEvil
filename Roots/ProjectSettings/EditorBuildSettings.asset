@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LocalMap.unity
     guid: c137bb100810f3e4f900a0d42f14a202
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/ChooseNextRoot.unity
+    guid: c34a731e90f788047a32a0ab565a435c
   m_configObjects: {}

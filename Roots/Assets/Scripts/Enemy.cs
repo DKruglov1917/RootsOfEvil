@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         outline = GetComponent<Outline>();
-
+        target = GameObject.Find("Player");
         RestartHealth();
     }
 
