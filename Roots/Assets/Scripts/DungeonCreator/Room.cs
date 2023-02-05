@@ -22,7 +22,7 @@ public class Room : MonoBehaviour
 
     private List<GameObject> deactivatedObstacles = new List<GameObject>();
 
-    private void Start()
+    private void Awake()
     {
         if(!ObstaclesObj) return;
 
